@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kubectl
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubectl
+  namespace: kubectl
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kubectl
+  namespace: kubectl
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      namespace: kubectl
+      labels:
+        app: kubectl
+    spec:
+      serviceAccount: kubectl
+      containers:
+      - image: quay.io/beeradb/kubectl-slackbot:latest
+        name: kubectl-slackbot
+        env:
+        - name: SLACKBOT_API_TOKEN
+          value: TOKEN HERE
