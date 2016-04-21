@@ -1,3 +1,1 @@
-default_reply = "Sorry but I didn't understood you"
-ERRORS_TO = 'bbowman'
-
+default_reply = "Sorry but I didn't understand you"
