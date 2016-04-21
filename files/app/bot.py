@@ -1,29 +1,25 @@
 #-*- coding: utf-8 -*-
-from slackbot.bot import Bot
-from slackbot.bot import listen_to
 import subprocess
 import os
 import shlex
+import time
+from slackclient import SlackClient
+
 
 def main():
-    bot = Bot()
-    bot.run()
+    token = "faketoken"# found at https://api.slack.com/web#authentication
+    sc = SlackClient(token)
+    if sc.rtm_connect():
+        while True:
+            message = sc.rtm_read()
+            if message:
+                print message[0]['type']
+                if message[0]['type'] is 'message':
+                    print "yay2"
 
-
-@listen_to('kubectl (.*)')
-def kubectl(message, kube_command):
-    # slack converts double dashes into an emdash
-    # so convert back before running.
-    kube_command = kube_command.decode("utf-8").replace(u"\u2014", "--").encode("utf-8")
-    print kube_command
-    result = kubectl(kube_command)
-
-    if not result:
-        result = "There was no output from the command."
-
-    # Wrap all replies in code blocks.
-    message.reply("```{message}```".format(message=result))
-
+            time.sleep(1)
+    else:
+        print "Connection Failed, invalid token?"
 
 def kubectl(command):
     """
@@ -42,9 +38,8 @@ def kubectl(command):
     # Code that calls run_command should be in a try/except to handle the failure case.
     try:
         print "running command {cmd}".format(cmd=cmd)
-        result = subprocess.check_output(shlex.split(cmd), env=env, stderr=subprocess.STDOUT)
+        result = subprocess.check_output(cmd, env=env, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
-        print e.output
         return e.output
 
     return result
