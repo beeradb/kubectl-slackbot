@@ -1,6 +1,6 @@
-# KubeCTL Slackbot
+# Kubectl Slackbot
 
-KubeCTL Slackbot is a bot based on [slackbot](https://github.com/lins05/slackbot) which allows you to run kubectl commands in slack.
+Kubectl Slackbot is a bot based on [slackbot](https://github.com/lins05/slackbot) which allows you to run kubectl commands in slack.
 
 ## Install
 
