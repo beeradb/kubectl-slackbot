@@ -17,6 +17,10 @@ def kubectl(message, kube_command):
     kube_command = kube_command.decode("utf-8").replace(u"\u2014", "--").encode("utf-8")
     print kube_command
     result = kubectl(kube_command)
+
+    if not result:
+        result = "There was no output from the command."
+
     # Wrap all replies in code blocks.
     message.reply("```{message}```".format(message=result))
 
@@ -36,7 +40,12 @@ def kubectl(command):
 
     # This will throw subprocess.CalledProcessError if the command fails.
     # Code that calls run_command should be in a try/except to handle the failure case.
-    result = subprocess.check_output(shlex.split(cmd), env=env, stderr=subprocess.STDOUT)
+    try:
+        print "running command {cmd}".format(cmd=cmd)
+        result = subprocess.check_output(shlex.split(cmd), env=env, stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        print e.output
+        return e.output
 
     return result
 
