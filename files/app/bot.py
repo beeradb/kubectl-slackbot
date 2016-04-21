@@ -3,6 +3,7 @@ from slackbot.bot import Bot
 from slackbot.bot import listen_to
 import subprocess
 import os
+import shlex
 
 def main():
     bot = Bot()
