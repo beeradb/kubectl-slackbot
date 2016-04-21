@@ -9,6 +9,7 @@ RUN apt-get -y update \
   && apt-get -y upgrade \
   && apt-get -y install python \
   && apt-get -y install software-properties-common \
+  && apt-get install -y build-essential python-dev python-pip \
   && apt-get clean \
   && echo "${KUBECTL_SHA256} */bin/kubectl" | sha256sum -c - \
   && chmod ugo+x /bin/kubectl
