@@ -16,17 +16,14 @@ def kubectl(message, kube_command):
     kube_command = kube_command.decode("utf-8").replace(u"\u2014", "--").encode("utf-8")
     print kube_command
     result = kubectl(kube_command)
-    message.reply(result)
+    # Wrap all replies in code blocks.
+    message.reply("```{message}```".format(message=result))
 
 
 def kubectl(command):
     """
     Run a kubect command and attempt to parse the results as json.
     :param command: the command to run
-    :param json: Whether or not to output results in json.
-    :param env: The environment to use.
-    :return: dict if parsed as json, raw output if not. Raises
-             subprocess.calledProcessError on command fail.
     """
     env = os.environ.copy()
 
