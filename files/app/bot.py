@@ -13,7 +13,9 @@ def main():
 def kubectl(message, kube_command):
     # slack converts double dashes into an emdash
     # so convert back before running.
-    result = kubectl(kube_command.replace('—', '--'))
+    kube_command = kube_command.decode("utf-8").replace(u"\u2014", "--").encode("utf-8")
+    print kube_command
+    result = kubectl(kube_command)
     message.reply(result)
 
 
