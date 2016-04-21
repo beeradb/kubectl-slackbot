@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 from slackbot.bot import Bot
-from slackbot.bot import listen_to
+from slackbot.bot import repond_to
 import subprocess
 import os
 import shlex
@@ -10,7 +10,7 @@ def main():
     bot.run()
 
 
-@listen_to('kubectl (.*)')
+@respond_to('(.*)')
 def kubectl(message, kube_command):
     # slack converts double dashes into an emdash
     # so convert back before running.
