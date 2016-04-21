@@ -10,7 +10,9 @@ def main():
 
 @listen_to('kubectl (.*)')
 def kubectl(message, kube_command):
-    result = kubectl(kube_command)
+    # slack converts double dashes into an emdash
+    # so convert back before running.
+    result = kubectl(kube_command.replace('—', '--'))
     message.reply(result)
 
 
