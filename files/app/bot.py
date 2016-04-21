@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 from slackbot.bot import Bot
-from slackbot.bot import repond_to
+from slackbot.bot import respond_to
 import subprocess
 import os
 import shlex
