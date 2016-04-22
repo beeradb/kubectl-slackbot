@@ -32,7 +32,7 @@ class Dispatcher:
     def process_message(self, message):
         if message['text'].startswith(self.identifier):
             cmd = message['text'].replace(self.identifier, '')
-            output = "```{out}```".format(kubectl(cmd))
+            output = "```{out}```".format(out=kubectl(cmd))
             self.sc.rtm_send_message(message['channel'], output)
             print(message)
 

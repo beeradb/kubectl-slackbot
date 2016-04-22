@@ -7,9 +7,9 @@ ADD https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}
 
 RUN apt-get -y update \
   && apt-get -y upgrade \
-  && apt-get -y install python \
+  && apt-get -y install python3 \
   && apt-get -y install software-properties-common \
-  && apt-get -y install build-essential python-dev python-pip \
+  && apt-get -y install build-essential python3-dev python3-pip \
   && apt-get clean \
   && echo "${KUBECTL_SHA256} */bin/kubectl" | sha256sum -c - \
   && chmod ugo+x /bin/kubectl
