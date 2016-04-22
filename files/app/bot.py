@@ -7,19 +7,42 @@ from slackclient import SlackClient
 
 
 def main():
-    token = "faketoken"# found at https://api.slack.com/web#authentication
+    token = os.environ.get('SLACK_API_TOKEN')# found at https://api.slack.com/web#authentication
     sc = SlackClient(token)
     if sc.rtm_connect():
+        Dispatcher(sc)
+    else:
+        print("Connection Failed, invalid token?")
+
+class Dispatcher:
+    def __init__(self, sc):
+        self.identifier = self.get_current_user_identifier(sc)
+        self.sc = sc
+        self.read()
+
+    def read(self):
         while True:
-            message = sc.rtm_read()
-            if message:
-                print message[0]['type']
-                if message[0]['type'] is 'message':
-                    print "yay2"
+            message = self.sc.rtm_read()
+            if message and message[0]['type'] == 'message':
+                   self.process_message(message[0])
 
             time.sleep(1)
-    else:
-        print "Connection Failed, invalid token?"
+
+
+    def process_message(self, message):
+        if message['text'].startswith(self.identifier):
+            cmd = message['text'].replace(self.identifier, '')
+            output = "```{out}```".format(kubectl(cmd))
+            self.sc.rtm_send_message(message['channel'], output)
+            print(message)
+
+    def get_current_user_identifier(self, sc):
+        for user in sc.server.users:
+            if user.name == sc.server.username:
+                return '<@{user_id}>'.format(user_id=user.id)
+
+        raise LookupError('Could not find bot user id')
+
 
 def kubectl(command):
     """
@@ -37,7 +60,7 @@ def kubectl(command):
     # This will throw subprocess.CalledProcessError if the command fails.
     # Code that calls run_command should be in a try/except to handle the failure case.
     try:
-        print "running command {cmd}".format(cmd=cmd)
+        print("running command {cmd}".format(cmd=cmd))
         result = subprocess.check_output(cmd, env=env, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
         return e.output
