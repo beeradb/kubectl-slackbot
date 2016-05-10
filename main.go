@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"os/exec"
 	"io/ioutil"
 	"os"
-	"strings"
+	"os/exec"
 	"reflect"
+	"strings"
 
 	"github.com/mattn/go-shellwords"
 	"github.com/nlopes/slack"
@@ -47,7 +47,7 @@ Loop:
 					if strings.Count(result, "\n") > 80 {
 						fmt.Println("Sending file")
 						file(result, ev.Channel, api)
-					}else {
+					} else {
 						fmt.Println("Sending message")
 						message(result, ev.Channel, rtm)
 					}
@@ -71,11 +71,11 @@ func message(result string, channel string, rtm *slack.RTM) {
 // Attach a result string as a file to a slack channel.
 func file(result string, channel string, api *slack.Client) {
 	params := slack.FileUploadParameters{
-		Title:          "Kubectl result",
-		Filetype:       "shell",
-		File:           "sh",
-		Channels:       []string{channel},
-		Content:        result,
+		Title:    "Kubectl result",
+		Filetype: "shell",
+		File:     "sh",
+		Channels: []string{channel},
+		Content:  result,
 	}
 
 	file, err := api.UploadFile(params)
