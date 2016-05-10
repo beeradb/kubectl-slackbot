@@ -29,5 +29,5 @@ spec:
       - image: quay.io/beeradb/kubectl-slackbot:latest
         name: kubectl-slackbot
         env:
-        - name: SLACKBOT_API_TOKEN
+        - name: SLACK_API_TOKEN
           value: TOKEN HERE
