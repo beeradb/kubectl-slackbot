@@ -1,6 +1,6 @@
 # Kubectl Slackbot
 
-![kubectl slackbot being used in the slack client][img/slack.png]
+![kubectl slackbot being used in the slack client](img/slack.png)
 
 Kubectl Slackbot is a bot based on [nlopes slack api](github.com/nlopes/slack). Kubectl Slackbot allows you to run kubectl commands in slack.
 
