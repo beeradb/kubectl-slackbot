@@ -1,10 +1,12 @@
 # Kubectl Slackbot
 
-Kubectl Slackbot is a bot based on [slackbot](https://github.com/lins05/slackbot) which allows you to run kubectl commands in slack.
+![kubectl slackbot being used in the slack client][img/slack.png]
+
+Kubectl Slackbot is a bot based on [nlopes slack api](github.com/nlopes/slack). Kubectl Slackbot allows you to run kubectl commands in slack.
 
 ## Install
 
-To install on a running kubernetes cluster just create a slack API token and update the "SLACKBOT_API_TOKEN" environment var in the kubectl-deployment.yaml file. Once completed, just run the following:
+To install on a running kubernetes cluster just create a slack API token and update the "SLACK_API_TOKEN" environment var in the kubectl-deployment.yaml file. Once completed, just run the following:
 
 ```
 kubectl create -f kubectl-deployment.yaml
