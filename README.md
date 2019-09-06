@@ -1,3 +1,7 @@
+# Deprecated
+
+This was just a fun side project I did a couple years back during my first couple weeks of learning go. Don't use this, seriously.
+
 # Kubectl Slackbot
 
 ![kubectl slackbot being used in the slack client](img/slack.png)
