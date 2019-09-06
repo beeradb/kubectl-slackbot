@@ -1,6 +1,6 @@
 # Deprecated
 
-This was just a fun side project I did a couple years back during my first couple weeks of learning go. Don't use this, seriously.
+This was just a fun side project I did a couple years back during my first couple weeks of learning go. Don't use this. Seriously.
 
 # Kubectl Slackbot
 
